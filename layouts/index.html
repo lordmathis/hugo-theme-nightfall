@@ -21,7 +21,16 @@
                     <div>
                         <h1 class="indexHeader">{{ .Site.Params.author.name }}</h1>
                     </div>
-                    {{ if isset .Site.Params "social" }}
+                    {{ if .Site.Params.author.avatar }}
+                        <div class="authorImageWrapper">
+                            <img 
+                                src="{{ .Site.Params.author.avatar }}" 
+                                alt="{{ .Site.Params.author.name }}" 
+                                class="{{ .Site.Params.author.avatarSize | default "size-m" }}" 
+                            />
+                        </div>
+                    {{ end }}
+                        {{ if isset .Site.Params "social" }}
                         {{ partial "social.html" . }}
                     {{ end }}
                 </div>

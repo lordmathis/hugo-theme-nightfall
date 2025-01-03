@@ -38,6 +38,8 @@ hostname = "gohugo.io"
 
   [params.author]
     name = "Mr Hugo"
+    avatar = "/avatar.png"
+    avatarSize = "size-m"
     email = "hugo@example.com"
 ```
 ### Social links
