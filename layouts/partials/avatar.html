@@ -1,0 +1,9 @@
+{{ if .Site.Params.author.avatar }}
+    <div class="authorImageWrapper">
+        <img 
+            src="{{ .Site.Params.author.avatar }}" 
+            alt="{{ .Site.Params.author.name }}" 
+            class="{{ .Site.Params.author.avatarSize | default "size-m" }}" 
+        />
+    </div>
+{{ end }}
