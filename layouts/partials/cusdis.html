@@ -1,0 +1,142 @@
+{{/* Cusdis comment system integration */}}
+{{/* Configure in hugo.toml: [params.cusdis] enable = true, app_id = "your-app-id" */}}
+{{ if and .Site.Params.cusdis.enable (not .Params.disableComments) }}
+<div class="comments-section">
+    <h3>Comments</h3>
+    <div id="cusdis_thread"
+         data-host="{{ .Site.Params.cusdis.host | default "https://cusdis.com" }}"
+         data-app-id="{{ .Site.Params.cusdis.app_id }}"
+         data-page-id="{{ .RelPermalink }}"
+         data-page-url="{{ .Permalink }}"
+         data-page-title="{{ .Title }}"
+         data-theme="dark">
+    </div>
+    
+    <!-- Hidden div to dynamically change theme for retro mode -->
+    <div id="cusdis_thread_retro" style="display: none;"
+         data-host="{{ .Site.Params.cusdis.host | default "https://cusdis.com" }}"
+         data-app-id="{{ .Site.Params.cusdis.app_id }}"
+         data-page-id="{{ .RelPermalink }}"
+         data-page-url="{{ .Permalink }}"
+         data-page-title="{{ .Title }}"
+         data-theme="dark">
+    </div>
+    <script async defer src="https://cusdis.com/js/cusdis.es.js" integrity="sha384-1Oz+j+3LY0fCYZj/aBE5xEGQkkYqhlXlq2zVH1TFjrzFHCE8qJZqDvNPM5R5B5bx" crossorigin="anonymous"></script>
+</div>
+
+<style>
+.comments-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid #444;
+    width: 100%;
+}
+
+.comments-section h3 {
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 1.5rem;
+    font-family: 'Fira Mono', monospace;
+}
+
+#cusdis_thread {
+    min-height: 800px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Force iframe styling to match blog post theme */
+#cusdis_thread iframe {
+    width: 100% !important;
+    min-height: 800px !important;
+    height: 800px !important;
+    background: transparent !important;
+    border: none !important;
+    color-scheme: dark;
+    overflow: hidden;
+}
+
+/* Custom CSS variables for Cusdis dark theme */
+#cusdis_thread {
+    --cusdis-primary-color: #ff6b35;
+    --cusdis-background-color: #1a1a1a;
+    --cusdis-text-color: #ffffff;
+    --cusdis-border-color: #333333;
+    --cusdis-input-background: #2a2a2a;
+    --cusdis-button-background: #ff6b35;
+    --cusdis-button-text: #ffffff;
+}
+
+/* Additional iframe content styling */
+#cusdis_thread iframe[src*="cusdis"] {
+    filter: invert(0) hue-rotate(0deg) !important;
+}
+</style>
+
+<script>
+// Enhanced script for larger iframe and better dark theme integration
+window.addEventListener('message', function(event) {
+    if (event.origin !== 'https://cusdis.com') return;
+    
+    const iframe = document.querySelector('#cusdis_thread iframe');
+    if (iframe && event.data.type === 'resize') {
+        // Make iframe much larger to show more comments
+        const newHeight = Math.max(800, event.data.height + 200);
+        iframe.style.height = newHeight + 'px';
+        iframe.style.width = '100%';
+        iframe.style.maxHeight = '1200px'; // Cap at reasonable size
+    }
+});
+
+// Force larger size and dark theme on Cusdis
+document.addEventListener('DOMContentLoaded', function() {
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            mutation.addedNodes.forEach(function(node) {
+                if (node.tagName === 'IFRAME' && node.src && node.src.includes('cusdis')) {
+                    // Force large size
+                    node.style.width = '100%';
+                    node.style.height = '800px';
+                    node.style.minHeight = '800px';
+                    node.style.maxHeight = '1200px';
+                    node.style.colorScheme = 'dark';
+                    node.style.background = 'transparent';
+                    node.style.border = 'none';
+                    
+                    // Add URL parameter for dark theme if not already present
+                    if (node.src && !node.src.includes('theme=dark')) {
+                        const separator = node.src.includes('?') ? '&' : '?';
+                        node.src += separator + 'theme=dark';
+                    }
+                    
+                    // Additional height adjustment after load
+                    node.onload = function() {
+                        setTimeout(() => {
+                            node.style.height = '800px';
+                            node.style.minHeight = '800px';
+                        }, 1000);
+                    };
+                }
+            });
+        });
+    });
+    
+    observer.observe(document.getElementById('cusdis_thread'), {
+        childList: true,
+        subtree: true
+    });
+    
+    // Periodically check and adjust iframe size
+    setInterval(() => {
+        const iframe = document.querySelector('#cusdis_thread iframe');
+        if (iframe) {
+            iframe.style.height = '800px';
+            iframe.style.minHeight = '800px';
+            iframe.style.width = '100%';
+        }
+    }, 2000);
+});
+</script>
+{{ end }}

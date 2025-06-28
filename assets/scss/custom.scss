@@ -1,0 +1,427 @@
+/* External fonts and icons loaded via partial for SRI security */
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/img/background.png');
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  opacity: 0.05;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.flexWrapper {
+  position: relative;
+  z-index: 1;
+}
+
+/* Full-width layout override */
+@media only screen and (min-width: 992px) {
+  .main {
+    width: 50% !important;
+    max-width: none !important;
+  }
+  
+  /* Make header full-width too */
+  .header {
+    width: 50% !important;
+    max-width: none !important;
+  }
+}
+
+/* Optional: Make content area wider too */
+.postWrapper {
+  max-width: none;
+  width: 100%;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+}
+
+.indexWrapper {
+  max-width: none;
+  width: 100%;
+}
+
+/* Increase author name size */
+.indexHeader {
+  font-size: 3.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+/* Author description styling */
+.authorDescription {
+  font-size: 1.3rem;
+  font-weight: 100;
+  color: #ccc;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-style: normal;
+}
+
+/* Ruby text (furigana) styling */
+.authorDescription ruby {
+  ruby-align: center;
+}
+
+.authorDescription rt {
+  font-size: 0.7rem;
+  color: #aaa;
+  font-weight: 100;
+  font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'ヒラギノ角ゴ ProN W3', sans-serif;
+}
+
+/* Better spacing around separators */
+.authorDescription {
+  word-spacing: 0.3rem;
+  letter-spacing: 0.05rem;
+}
+
+/* Force Font Awesome size classes to work by boosting their specificity */
+.socialNavbar a i.fa-xs { 
+  font-size: 0.75em !important; 
+  line-height: 0.08333em !important; 
+  vertical-align: 0.125em !important; 
+}
+.socialNavbar a i.fa-sm { 
+  font-size: 0.875em !important; 
+  line-height: 0.07143em !important; 
+  vertical-align: 0.05357em !important; 
+}
+.socialNavbar a i.fa-lg { 
+  font-size: 1.25em !important; 
+  line-height: 0.05em !important; 
+  vertical-align: -0.075em !important; 
+}
+.socialNavbar a i.fa-xl { 
+  font-size: 1.5em !important; 
+  line-height: 0.04167em !important; 
+  vertical-align: -0.125em !important; 
+}
+.socialNavbar a i.fa-2xl { 
+  font-size: 2em !important; 
+  line-height: 0.03125em !important; 
+  vertical-align: -0.1875em !important; 
+}
+
+.socialNavbar ul li {
+  margin: 0 1rem !important;
+}
+
+/* Set base font-size for social icons so FA sizing works properly */
+.socialNavbar a {
+  font-size: 2rem !important;
+}
+
+/* Force inline styles to work with maximum specificity */
+.socialNavbar a[style*="color"] i {
+  color: inherit !important;
+}
+
+/* Dynamic theme color CSS variables - will be injected by Hugo */
+:root {
+  --theme-color: #80AADD; /* Default blue, will be overridden */
+  --theme-color-dark: #3366AA; /* Default blue dark, will be overridden */
+}
+
+/* Thick underline hover effect with dynamic theme color */
+a:hover {
+  text-decoration: none !important;
+  border-bottom: 5px solid var(--theme-color) !important;
+  transition: border-bottom 0.1s ease !important;
+}
+
+/* Remove underline from social icons */
+.socialNavbar a:hover {
+  border-bottom: none !important;
+}
+
+/* Universal social links hover effects */
+.socialNavbar a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  display: inline-block !important;
+}
+
+.socialNavbar a:hover {
+  transform: translateY(-3px) scale(1.1) !important;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4)) !important;
+  animation: subtle-bounce 0.6s ease-in-out !important;
+}
+
+/* Icons get pulsing glow effect */
+.socialNavbar a:hover i {
+  animation: pulse-glow 1.5s ease-in-out infinite !important;
+}
+
+/* Text-only links get color change and glow */
+.socialNavbar a:hover:not([title]):not([aria-label*="Profile"]) {
+  color: var(--theme-color) !important;
+  text-shadow: 0 0 8px var(--theme-color) !important;
+}
+
+/* Fallback for any text-only social link */
+.socialNavbar a:hover {
+  color: var(--theme-color) !important;
+  text-shadow: 0 0 3px rgba(242, 110, 116, 0.3) !important;
+}
+
+/* Brand-specific glow colors for icons */
+.socialNavbar a[href*="github"]:hover i {
+  filter: drop-shadow(0 0 3px rgba(36, 41, 46, 0.4)) !important;
+}
+
+.socialNavbar a[href*="twitter"]:hover i,
+.socialNavbar a[href*="x.com"]:hover i {
+  filter: drop-shadow(0 0 3px rgba(3, 169, 243, 0.4)) !important;
+}
+
+.socialNavbar a[href*="linkedin"]:hover i {
+  filter: drop-shadow(0 0 3px rgba(10, 102, 194, 0.4)) !important;
+}
+
+.socialNavbar a[href*="mailto"]:hover i {
+  filter: drop-shadow(0 0 3px rgba(242, 110, 116, 0.4)) !important;
+}
+
+.socialNavbar a[href*="pgp"]:hover i,
+.socialNavbar a[href*="key"]:hover i {
+  filter: drop-shadow(0 0 3px rgba(242, 110, 116, 0.4)) !important;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { 
+    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.2));
+    transform: scale(1);
+  }
+  50% { 
+    filter: drop-shadow(0 0 3px rgba(255, 255, 255, 0.3));
+    transform: scale(1.05);
+  }
+}
+
+@keyframes subtle-bounce {
+  0%, 100% { transform: translateY(-3px) scale(1.1); }
+  50% { transform: translateY(-5px) scale(1.12); }
+}
+
+/* Header navigation styling */
+.headerLinks a {
+  position: relative !important;
+  padding-bottom: 4px !important;
+  border-bottom: 2px solid transparent !important;
+  transition: all 0.1s ease !important;
+}
+
+.headerLinks a:hover {
+  border-bottom: 2px solid var(--theme-color) !important;
+  color: var(--theme-color) !important;
+}
+
+/* Active page highlighting */
+.headerLinks a.active {
+  color: var(--theme-color) !important;
+  border-bottom: 2px solid var(--theme-color) !important;
+}
+
+/* Default post list styling (with excerpts) */
+.postListLink {
+  text-decoration: none !important;
+  display: block !important;
+}
+
+/* Force left alignment for minimal list containers */
+.postListItem--minimal,
+.postListItem--minimal * {
+  text-align: left !important;
+}
+
+.postListLink:hover {
+  border-bottom: none !important;
+}
+
+/* Override centering for minimal list style */
+.postListItem--minimal {
+  background: none !important;
+  border: none !important;
+  padding: 1.2rem 0 !important;
+  margin: 0 !important;
+  position: relative;
+  text-align: left !important;
+}
+
+/* Ensure parent container is also left-aligned for minimal style */
+.postListItem--minimal ~ * {
+  text-align: left !important;
+}
+
+.postListItem--minimal:hover {
+  background: none !important;
+}
+
+/* Stylish gradient separator line */
+.postListItem--minimal::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--theme-color) 0%, transparent 50%, var(--theme-color) 100%);
+  opacity: 0.3;
+}
+
+.postListItem--minimal:last-child::after {
+  display: none;
+}
+
+.postListItem--minimal .postHeader {
+  display: inline-block;
+  margin-bottom: 0.3rem;
+}
+
+.postListItem--minimal .postTitle {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: #fff;
+  display: inline;
+  transition: color 0.1s ease;
+}
+
+.postListItem--minimal:hover .postTitle {
+  color: var(--theme-color);
+  cursor: pointer;
+}
+
+.postListItem--minimal .postDate {
+  font-size: 0.9rem;
+  color: #aaa;
+  display: inline;
+  margin-left: 1rem;
+}
+
+.postListItem--minimal .postTags {
+  font-size: 0.85rem;
+  color: #666;
+  display: block;
+  margin-top: -0.1rem;
+  line-height: 1;
+  font-style: italic;
+}
+
+/* Back to section button styling */
+.backToSection {
+  margin-bottom: 2rem;
+}
+
+.backButton {
+  font-size: 0.9rem;
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.1s ease;
+}
+
+.backButton:hover {
+  color: var(--theme-color);
+  border-bottom: none !important;
+}
+
+/* Previous/Next navigation styling */
+.postNavigation {
+  display: flex;
+  justify-content: space-between;
+  margin: 3rem 0 2rem 0;
+  gap: 2rem;
+}
+
+/* When only next button exists, align it to the right */
+.postNavigation:has(.navButton--next:only-child) {
+  justify-content: flex-end;
+}
+
+/* When only prev button exists, align it to the left */
+.postNavigation:has(.navButton--prev:only-child) {
+  justify-content: flex-start;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  padding: 1rem;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background: #2a2a2a;
+  transition: all 0.1s ease;
+  flex: 1;
+  max-width: 45%;
+}
+
+.navButton:hover {
+  border-color: var(--theme-color);
+  background: #333;
+  border-bottom: 1px solid var(--theme-color) !important;
+}
+
+.navButton--prev {
+  text-align: left;
+}
+
+.navButton--next {
+  text-align: right;
+}
+
+.navLabel {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-bottom: 0.3rem;
+}
+
+.navTitle {
+  font-size: 0.9rem;
+  color: #fff;
+  line-height: 1.3;
+}
+
+/* Cover image styling */
+.postCover {
+  margin: 2rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.postCover img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  max-height: 400px;
+}
+
+/* Terminal header styling */
+.terminal-dollar {
+  color: var(--theme-color);
+  font-weight: 500;
+}
+
+.terminal-cursor {
+  color: var(--theme-color);
+}
+
+.terminal-cursor::after {
+  content: '_';
+  animation: blink 1s infinite;
+  color: var(--theme-color);
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}

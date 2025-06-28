@@ -1,8 +1,20 @@
-# Nightfall
+# Nightfall Enhanced
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/27bf2d3e-412b-442b-b234-60dbac60e714/deploy-status)](https://app.netlify.com/sites/hugo-theme-nightfall/deploys)
 
-Nightfall is a minimal dark theme for Hugo. [Demo](https://hugo-theme-nightfall.netlify.app)
+Nightfall Enhanced is a feature-rich dark theme for Hugo with custom enhancements including social media integration, Konami code easter eggs, and advanced styling options. [Demo](https://hugo-theme-nightfall.netlify.app)
+
+## Enhanced Features
+
+- **Dynamic Theme Colors**: Choose from preset colors or use custom hex values
+- **Avatar Support**: Circular avatar image with configurable sizing
+- **Social Media Integration**: Font Awesome icons with hover effects and custom styling
+- **Comment System**: Cusdis integration with dark theme support
+- **Konami Code Easter Egg**: Hidden retro terminal mode (↑↑↓↓←→←→BA)
+- **Enhanced Navigation**: Current page highlighting and hover effects
+- **List Display Options**: Choose between full excerpts or minimal title/date/tags
+- **SEO Optimized**: Open Graph, Twitter Cards, JSON-LD structured data
+- **Modern Web Standards**: Sitemap, robots.txt, humans.txt generation
 
 ![Hugo Theme Nightfall](https://raw.githubusercontent.com/LordMathis/hugo-theme-nightfall/main/images/screenshot.png)
 ![Hugo Theme Nightfall Posts](https://raw.githubusercontent.com/LordMathis/hugo-theme-nightfall/main/images/screenshot_2.png)
@@ -27,62 +39,198 @@ Import manually:
 
 ## Configuration
 
-For full example check `exampleSite/hugo.toml`
+For a complete example, see `exampleSite/hugo.enhanced.toml`
 
-Add these params to your `hugo.toml`
+### Migration Notice
+
+The parameter structure has been refactored for clarity:
+
+**Deprecated (still supported with fallbacks):**
+- `sitedescription` → Use `description` (site-level)
+- `author.description` → Use `author.bioHtml`
+- `author.tagline` → Use `author.bio`
+
+**New structure:**
+- Site-level: `description` for meta tags, `site.tagline` for site catchphrase
+- Author-level: `author.bio` (plain text), `author.bioHtml` (rich HTML)
+
+### Basic Setup
 
 ```toml
+baseURL = 'https://yoursite.com/'
+languageCode = 'en-us'
+title = "Your Site Title"
+
 [params]
-user = "hello"
-hostname = "gohugo.io"
+  user = "hello"                      # Terminal prompt user
+  hostname = "yoursite.dev"           # Terminal prompt hostname
+  description = "Your site meta description"  # Site description for meta tags
+  readingTime = true                  # Show reading time on posts
+  published = true                    # Show published date on posts
+  listStyle = "default"               # "default" or "minimal" for post lists
 
+  # Site information
+  [params.site]
+    tagline = "Your site tagline"     # Short site catchphrase
+
+  # Author information
   [params.author]
-    name = "Mr Hugo"
-    avatar = "/avatar.png"
-    avatarSize = "size-m"
-    email = "hugo@example.com"
-    avatarFirst = false
-```
-### Social links
+    name = "Your Name"
+    bio = "Your plain text bio"       # Plain text bio (primary)
+    bioHtml = "Your <em>HTML</em> bio with markup"  # Rich HTML bio for web display
+    email = "your@email.com"
+    
+  # Custom ASCII art for HTML comments (optional)
+  # If not set, defaults to original px4n ASCII art
+  customAsciiArt = """
+  ╔══════════════════════════════════════╗
+  ║                                      ║
+  ║    Your Custom ASCII Art Here        ║
+  ║                                      ║
+  ╚══════════════════════════════════════╝"""
+    avatar = "/img/avatar.png"        # Path to avatar image
+    avatarSize = "size-xl"            # Avatar size: size-xs, size-sm, size-lg, size-xl, size-2xl
+    avatarFirst = true                # Show avatar above name
+    twitter = "yourusername"          # Twitter handle (without @)
+    github = "yourusername"           # GitHub username
+    linkedin = "yourusername"         # LinkedIn username
+    sourceRepo = "https://github.com/yourusername/repo"  # Source code repo
 
-You can also add social links. To use icons for social links, you also need to add the link to icon font to custom-head.html
+  # Theme colors
+  [params.styles]
+    color = "blue"                    # blue, orange, green, red, or hex value
+
+  # SEO configuration
+  [params.seo]
+    themeColor = "#80AADD"           # Browser theme color
+```
+
+### Social Media Links
+
+Social links support Font Awesome icons with hover effects:
 
 ```toml
 [[params.social]]
-key = 0
-name = "github"
-url = "https://github.com/gohugoio"
-icon = "fa-brands fa-github"  # Add link to your icon font to `layouts/partials/custom-head.html`
-target = "_blank" # Defines your target option in a-href. _blank for a new Tab for example.
-aria = "GitHub Profile" # Define the aria label for accessibility like page reader - this is better for your SEO
+  key = 0
+  name = "GitHub"
+  url = "https://github.com/yourusername"
+  target = "_blank"
+  aria = "GitHub Profile"
+  icon = "fa-brands fa-github fa-xl"
+  style = "color: #24292e"
 
 [[params.social]]
-key = 1
-name = "twitter"
-url = "https://www.example.com"
+  key = 1
+  name = "Twitter"
+  url = "https://twitter.com/yourusername"
+  target = "_blank"
+  aria = "Twitter Profile"
+  icon = "fa-brands fa-x-twitter fa-xl"
+  style = "color: #1da1f2"
 
 [[params.social]]
-key = 2
-name = "mastodon"
-url = "https://www.example.com"
-rel = "me"  # You can also add rel to social link
+  key = 2
+  name = "LinkedIn"
+  url = "https://linkedin.com/in/yourusername"
+  target = "_blank"
+  aria = "LinkedIn Profile"
+  icon = "fa-brands fa-linkedin fa-xl"
+  style = "color: #0a66c2"
 
+# Text-only links (no icon)
 [[params.social]]
-key = 3
-name = "email"
-url = "mailto:email@example.com"
+  key = 3
+  name = "Portfolio"
+  url = "https://yourportfolio.com"
+  target = "_blank"
+  aria = "Portfolio"
 ```
 
-### Color
+### Comment System (Cusdis)
 
-You can customize post title and link color
+```toml
+[params.cusdis]
+  enable = true
+  app_id = "your-cusdis-app-id"      # Get from Cusdis dashboard
+  host = "https://cusdis.com"
+```
+
+To disable comments on specific posts, add to front matter:
+```yaml
+disableComments: true
+```
+
+### Theme Colors
+
+Choose from presets or use custom colors:
+
+- **Presets**: `blue` (default), `orange`, `green`, `red`
+- **Custom**: Any hex value like `#FF6B35`
 
 ```toml
 [params.styles]
-color = "orange"
+  color = "#FF6B35"  # Custom hex color
 ```
 
-Specify your own color with hex value or use one of the predefined colors (blue, orange, green or red). The default color is blue. Best contrast is provided by orange.
+## Special Features
+
+### Konami Code Easter Egg
+
+Enter the famous Konami code (↑↑↓↓←→←→BA) to activate retro terminal mode! The entire site transforms into a green phosphor CRT terminal with scanline effects.
+
+### List Display Modes
+
+Choose how your blog/project lists appear:
+
+```toml
+[params]
+  listStyle = "minimal"  # Shows only title, date, and tags
+  # OR
+  listStyle = "default"  # Shows full excerpts (original behavior)
+```
+
+### Avatar Display
+
+Configure your profile avatar:
+
+```toml
+[params.author]
+  avatar = "/img/avatar.png"
+  avatarSize = "size-xl"           # size-xs, size-sm, size-lg, size-xl, size-2xl
+  avatarFirst = true               # Show above name (false = show beside)
+```
+
+### Terminal-Style Header
+
+The header includes a customizable terminal prompt:
+
+```toml
+[params]
+  user = "hello"                   # Username in terminal prompt
+  hostname = "yoursite.dev"        # Hostname in terminal prompt
+```
+
+Displays as: `hello@yoursite.dev ~ $`
+
+### Enhanced Social Links
+
+Social links feature advanced hover effects:
+- **Icons**: Scale up, float, and glow on hover
+- **Text**: Color change and glow effects
+- **Brand Colors**: Automatic brand-specific glowing
+
+### Post Features
+
+Add these to your post front matter:
+
+```yaml
+---
+title: "Your Post Title"
+cover: "/img/post-cover.jpg"     # Cover image
+lastmod: 2024-01-15              # Last modified date
+disableComments: true            # Disable comments for this post
+---
+```
 
 ### Post metadata
 

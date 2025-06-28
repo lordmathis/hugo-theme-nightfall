@@ -1,20 +1,26 @@
+{{ partial "ascii-art.html" . }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 
 <head>
+    <!-- Document Title -->
     <title>
         {{ i18n "home" }} | {{ .Site.Params.author.name }}
     </title>
 
+    <!-- Meta tags, CSS, and other head elements -->
     {{ partial "head.html" . }}
 
 </head>
 
 <body>
-
+    <!-- Main site wrapper -->
     <div class="flexWrapper">
+
+        <!-- Site header with navigation -->
         {{ partial "header.html" . }}
 
+        <!-- Homepage content -->
         <div class="content vertical">
             <main class="main">
                 <div class="indexWrapper">
@@ -23,6 +29,13 @@
                     {{ end }}
                     <div>
                         <h1 class="indexHeader">{{ .Site.Params.author.name }}</h1>
+                        {{ if .Site.Params.author.bioHtml }}
+                            <p class="authorDescription">{{ .Site.Params.author.bioHtml | safeHTML }}</p>
+                        {{ else if .Site.Params.author.description }}
+                            <p class="authorDescription">{{ .Site.Params.author.description | safeHTML }}</p>
+                        {{ else if .Site.Params.author.bio }}
+                            <p class="authorDescription">{{ .Site.Params.author.bio }}</p>
+                        {{ end }}
                     </div>
                     {{ if not .Site.Params.author.avatarFirst }}
                         {{ partial "avatar.html" . }}
@@ -34,9 +47,11 @@
             </main>
         </div>
 
-
+        <!-- Site footer -->
         {{ partial "footer.html" . }}
+
     </div>
+    <!-- End main wrapper -->
 
 </body>
 

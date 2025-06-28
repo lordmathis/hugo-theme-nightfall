@@ -1,0 +1,102 @@
+/* Konami Code Easter Egg - Retro Terminal Mode */
+body.retro-mode {
+  background: #000 !important;
+  color: #00ff00 !important;
+  font-family: 'Courier New', monospace !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+body.retro-mode::before {
+  background-image: none !important;
+}
+
+body.retro-mode * {
+  color: #00ff00 !important;
+  background: transparent !important;
+  border-color: #00ff00 !important;
+}
+
+body.retro-mode a:hover {
+  color: #ffffff !important;
+  border-bottom-color: #ffffff !important;
+  text-shadow: 0 0 10px #ffffff;
+}
+
+body.retro-mode .navButton {
+  background: #001100 !important;
+  border-color: #00ff00 !important;
+}
+
+body.retro-mode .navButton:hover {
+  background: #002200 !important;
+  box-shadow: 0 0 10px #00ff00;
+}
+
+/* Comment section styling in retro mode */
+body.retro-mode .comments-section h3 {
+  color: #00ff00 !important;
+  font-family: 'Courier New', monospace !important;
+  text-shadow: 0 0 5px #00ff00;
+}
+
+body.retro-mode #cusdis_thread iframe {
+  filter: hue-rotate(60deg) saturate(3) contrast(1.4) brightness(1.1) !important;
+}
+
+/* CRT scanline effect */
+body.retro-mode::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 255, 0, 0.03) 0px,
+    rgba(0, 255, 0, 0.03) 1px,
+    transparent 1px,
+    transparent 2px
+  );
+  z-index: 1000;
+}
+
+/* Terminal easter egg notification */
+.konami-notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #001100;
+  color: #00ff00;
+  padding: 1rem 1.5rem;
+  border: 1px solid #00ff00;
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 0.9rem;
+  z-index: 1001;
+  box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
+  animation: slideInRight 0.5s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+/* Blinking cursor effect */
+.terminal-cursor::after {
+  content: '_';
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}

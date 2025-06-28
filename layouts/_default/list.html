@@ -6,7 +6,16 @@
 
 <div>
     <div class="listHeader">
-        <h1>{{ .Title }}</h1>
+        {{ $section := .Section }}
+        {{ $sectionTitle := .Title }}
+        {{ if eq $section "blog" }}
+            {{ $sectionTitle = "Blog" }}
+        {{ else if eq $section "project" }}
+            {{ $sectionTitle = "Projects" }}
+        {{ else if eq $section "article" }}
+            {{ $sectionTitle = "Articles" }}
+        {{ end }}
+        <h1>{{ $sectionTitle }}</h1>
     </div>
 
     {{ with .Content }}
@@ -20,18 +29,30 @@
 
         <a class="postListLink" href="{{ .Permalink }}">
             <!-- [html-validate-disable-next prefer-native-element] -->
-            <div class="postListItem" role="listitem">
+            <div class="postListItem{{ if eq .Site.Params.listStyle "minimal" }} postListItem--minimal{{ end }}" role="listitem">
                 <div class="postHeader">
                     <span class="postTitle">{{ .Title }}</span>
-                    {{ $formattedDate := .Date.Format "2006-01-02" }}
-                    <time class="postDate" datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time>
+                    {{ if eq .Site.Params.listStyle "minimal" }}
+                        {{ $formattedDateTime := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+                        <time class="postDate" datetime="{{ $formattedDateTime }}">{{ .Date.Format "Jan 2, 2006 at 15:04" }}</time>
+                    {{ else }}
+                        {{ $formattedDate := .Date.Format "2006-01-02" }}
+                        <time class="postDate" datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time>
+                    {{ end }}
                 </div>
-                <div class="postExcerpt">
-                    <p>{{ .Summary }}</p>
-                </div>
+                {{ if eq .Site.Params.listStyle "minimal" }}
+                    {{ with .GetTerms "tags" }}
+                        <span class="postTags">
+                            {{ range $index, $tag := . }}{{ if $index }}<span style="margin-right: 0.5rem;"></span>{{ end }}#{{ $tag.LinkTitle }}{{ end }}
+                        </span>
+                    {{ end }}
+                {{ else }}
+                    <div class="postExcerpt">
+                        <p>{{ .Summary }}</p>
+                    </div>
+                {{ end }}
             </div>
         </a>
-
 
         {{end}}
     </div>

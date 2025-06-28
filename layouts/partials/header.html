@@ -2,7 +2,7 @@
     <div class="header">
         <div>
             <a class="terminal" href="{{ .Site.BaseURL | relLangURL }}">
-                <span>{{ .Site.Params.user }}@{{ .Site.Params.hostname }} ~ $</span>
+                <span>{{ .Site.Params.user }}@{{ .Site.Params.hostname }} ~ <span class="terminal-dollar">$</span><span class="terminal-cursor"></span></span>
             </a>
         </div>
         <input class="side-menu" type="checkbox" id="side-menu">

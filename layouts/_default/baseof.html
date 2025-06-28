@@ -1,20 +1,26 @@
+{{ partial "ascii-art.html" . }}
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode }}">
 
 <head>
+    <!-- Document Title -->
     <title>{{ block "title" . }}
         {{ .Site.Title }}
         {{ end }}</title>
 
+    <!-- Meta tags, CSS, and other head elements -->
     {{ partial "head.html" . }}
 
 </head>
 
 <body>
-
+    <!-- Main site wrapper -->
     <div class="flexWrapper">
+
+        <!-- Site header with navigation -->
         {{ partial "header.html" . }}
 
+        <!-- Main content area -->
         <div class="content">
             <main class="main">
                 {{ block "main" . }}
@@ -22,9 +28,11 @@
             </main>
         </div>
 
-
+        <!-- Site footer -->
         {{ partial "footer.html" . }}
+
     </div>
+    <!-- End main wrapper -->
 
 </body>
 

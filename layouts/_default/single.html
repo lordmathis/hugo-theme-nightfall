@@ -4,6 +4,31 @@
 
 {{ define "main" }}
 <div class="postWrapper">
+    <!-- Back to section button -->
+    {{ $section := .Section }}
+    {{ if $section }}
+        <div class="backToSection">
+            {{ $sectionName := title $section }}
+            {{ if eq $section "blog" }}
+                {{ $sectionName = "Blog" }}
+            {{ else if eq $section "project" }}
+                {{ $sectionName = "Projects" }}
+            {{ else if eq $section "article" }}
+                {{ $sectionName = "Articles" }}
+            {{ else }}
+                {{ $sectionName = printf "%ss" (title $section) }}
+            {{ end }}
+            <a href="/{{ $section }}/" class="backButton">← Back to {{ $sectionName }}</a>
+        </div>
+    {{ end }}
+    
+    <!-- Cover image -->
+    {{ if .Params.cover }}
+        <div class="postCover">
+            <img src="{{ .Params.cover }}" alt="{{ .Title }}" />
+        </div>
+    {{ end }}
+    
     <h1>{{ .Title }}</h1>
     {{ if .Description}}
     	<p>{{.Description}}</p>
@@ -22,8 +47,15 @@
             {{ end }}
             {{ if .Site.Params.published | default true }}
                 <dt>{{ i18n "published" }}</dt>
-                {{ $formattedDate := .Date.Format "2006-01-02" }}
-                <dd><time datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time></dd>
+                {{ $formattedDateTime := .Date.Format "2006-01-02T15:04:05Z07:00" }}
+                <dd><time datetime="{{ $formattedDateTime }}">{{ .Date.Format "Jan 2, 2006 at 15:04" }}</time></dd>
+            {{ end }}
+            {{ if .Lastmod }}
+                {{ if ne (.Date.Format "2006-01-02") (.Lastmod.Format "2006-01-02") }}
+                    <dt>last modified</dt>
+                    {{ $formattedLastmodDateTime := .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}
+                    <dd><time datetime="{{ $formattedLastmodDateTime }}">{{ .Lastmod.Format "Jan 2, 2006 at 15:04" }}</time></dd>
+                {{ end }}
             {{ end }}
             {{ if .Site.Params.readingTime | default true }}
                 <dt>{{ i18n "reading_time" }}</dt>
@@ -35,5 +67,24 @@
     <div>
         {{ .Content }}
     </div>
+    
+    <!-- Previous/Next navigation -->
+    <nav class="postNavigation">
+        {{ with .PrevInSection }}
+            <a href="{{ .Permalink }}" class="navButton navButton--prev">
+                <span class="navLabel">← Previous</span>
+                <span class="navTitle">{{ .Title }}</span>
+            </a>
+        {{ end }}
+        
+        {{ with .NextInSection }}
+            <a href="{{ .Permalink }}" class="navButton navButton--next">
+                <span class="navLabel">Next →</span>
+                <span class="navTitle">{{ .Title }}</span>
+            </a>
+        {{ end }}
+    </nav>
+    
+    {{ partial "cusdis.html" . }}
 </div>
 {{ end }}

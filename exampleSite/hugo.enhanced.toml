@@ -1,0 +1,110 @@
+baseURL = 'https://yoursite.com/'
+languageCode = 'en-us'
+title = "Your Site Title"
+
+# Sitemap configuration
+[sitemap]
+  changefreq = 'monthly'
+  filename = 'sitemap.xml'
+  priority = 0.5
+
+# Enable RSS feeds and robots.txt
+enableRobotsTXT = true
+rssLimit = 20
+
+# Menu configuration
+[menu]
+  [[menu.header]]
+    name = "about"
+    weight = 10
+    url = "about"
+  [[menu.header]]
+    name = "blog"
+    weight = 20
+    url = "blog"
+  [[menu.header]]
+    name = "projects"
+    weight = 30
+    url = "projects"
+
+[params]
+  user = "hello"                              # Terminal prompt username
+  hostname = "yoursite.dev"                   # Terminal prompt hostname
+  sitedescription = "Your awesome website"
+  readingTime = true                          # Show reading time on posts
+  published = true                            # Show published date on posts
+  listStyle = "default"                       # "default" or "minimal"
+  footerHtml = '© [YEAR] [AUTHOR] | Built with <a href="https://gohugo.io" class="footerLink">Hugo</a> and <a href="https://github.com/yourusername/hugo-theme-nightfall" class="footerLink">Nightfall</a>'
+
+  # Author information
+  [params.author]
+    name = "Your Name"
+    description = "Your tagline or professional description"
+    email = "your@email.com"
+    avatar = "/img/avatar.png"                # Path to your avatar image
+    avatarSize = "size-xl"                    # size-xs, size-sm, size-lg, size-xl, size-2xl
+    avatarFirst = true                        # Show avatar above name
+    twitter = "yourusername"                  # Twitter handle (without @)
+    github = "yourusername"                   # GitHub username
+    linkedin = "yourusername"                 # LinkedIn username
+    sourceRepo = "https://github.com/yourusername/yourrepo"
+
+  # Theme styling
+  [params.styles]
+    color = "blue"                            # blue, orange, green, red, or hex value
+
+  # SEO configuration
+  [params.seo]
+    themeColor = "#80AADD"                    # Browser theme color
+
+  # Comment system (Cusdis)
+  [params.cusdis]
+    enable = true
+    app_id = "your-cusdis-app-id"             # Get from Cusdis dashboard
+    host = "https://cusdis.com"
+
+  # Social media links
+  [[params.social]]
+    key = 0
+    name = "GitHub"
+    url = "https://github.com/yourusername"
+    target = "_blank"
+    aria = "GitHub Profile"
+    icon = "fa-brands fa-github fa-xl"
+
+  [[params.social]]
+    key = 1
+    name = "Twitter"
+    url = "https://twitter.com/yourusername"
+    target = "_blank"
+    aria = "Twitter Profile"
+    icon = "fa-brands fa-x-twitter fa-xl"
+    style = "color: #1da1f2"
+
+  [[params.social]]
+    key = 2
+    name = "LinkedIn"
+    url = "https://linkedin.com/in/yourusername"
+    target = "_blank"
+    aria = "LinkedIn Profile"
+    icon = "fa-brands fa-linkedin fa-xl"
+    style = "color: #0a66c2"
+
+  [[params.social]]
+    key = 3
+    name = "Email"
+    url = "mailto:your@email.com"
+    aria = "Email Address"
+    icon = "fa-solid fa-envelope fa-lg"
+
+  # Text-only social link example
+  [[params.social]]
+    key = 4
+    name = "Portfolio"
+    url = "https://yourportfolio.com"
+    target = "_blank"
+    aria = "Portfolio Website"
+
+[module]
+  [[module.imports]]
+    path = 'nightfall'

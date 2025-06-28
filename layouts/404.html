@@ -1,8 +1,193 @@
 {{ define "title"}}
-404 | {{ .Site.Params.author.name }}
+404 - Page Not Found | {{ .Site.Params.author.name }}
 {{ end }}
 
 {{ define "main"}}
-<h1>{{ i18n "not_found" }}</h1>
-<p>{{ i18n "not_found_desc" }}</p>
+<div class="errorWrapper">
+    <div class="errorCode">
+        <h1>404</h1>
+    </div>
+    
+    <div class="errorMessage">
+        <h2>#!/bin/bash</h2>
+        <div class="terminalOutput">
+            <p>$ ls -la {{ .RelPermalink }}</p>
+            <p class="errorText">ls: cannot access '{{ .RelPermalink }}': No such file or directory</p>
+            <p>$ echo "Houston, we have a problem..."</p>
+            <p class="glitch">Houston, we have a problem...</p>
+            <p>$ whoami</p>
+            <p>lost_user</p>
+            <p>$ pwd</p>
+            <p>/404/void/nowhere</p>
+        </div>
+        
+        <div class="errorHelp">
+            <h3>Error Analysis:</h3>
+            <ul>
+                <li><strong>Status:</strong> HTTP 404 - Resource Not Found</li>
+                <li><strong>Cause:</strong> The requested path does not exist in the filesystem</li>
+                <li><strong>Impact:</strong> User experience interrupted, navigation failed</li>
+                <li><strong>Resolution:</strong> Redirect to known good paths below</li>
+            </ul>
+            
+            <h3>Available Routes:</h3>
+            <div class="navigationSuggestions">
+                <a href="/" class="errorButton">
+                    <i class="fas fa-home"></i> ~/ (Home)
+                </a>
+                <a href="/blog" class="errorButton">
+                    <i class="fas fa-blog"></i> ~/blog
+                </a>
+                <a href="/projects" class="errorButton">
+                    <i class="fas fa-code"></i> ~/projects
+                </a>
+                <a href="/articles" class="errorButton">
+                    <i class="fas fa-newspaper"></i> ~/articles
+                </a>
+                <a href="/about" class="errorButton">
+                    <i class="fas fa-user"></i> ~/about
+                </a>
+            </div>
+            
+            <div class="errorFooter">
+                <p>🤖 If you believe this is a bug, please report it to the system administrator.</p>
+                <p class="konamiHint">💡 <em>Psst... try the Konami code for a surprise: ↑↑↓↓←→←→BA</em></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.errorWrapper {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem 2rem 2rem 2rem;
+}
+
+.errorCode h1 {
+    font-size: 8rem;
+    font-weight: bold;
+    color: var(--theme-color);
+    text-shadow: 0 0 20px var(--theme-color);
+    margin: 0 0 1rem 0;
+    font-family: 'Courier New', monospace;
+}
+
+.errorMessage {
+    text-align: left;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.errorMessage h2 {
+    color: var(--theme-color);
+    font-family: 'Courier New', monospace;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.terminalOutput {
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.terminalOutput p {
+    margin: 0.5rem 0;
+}
+
+.errorText {
+    color: #ff6b6b !important;
+}
+
+.glitch {
+    color: var(--theme-color);
+    animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translateX(0); }
+    10% { transform: translateX(-2px); }
+    20% { transform: translateX(2px); }
+    30% { transform: translateX(-2px); }
+    40% { transform: translateX(2px); }
+    50% { transform: translateX(0); }
+    100% { transform: translateX(0); }
+}
+
+.errorHelp h3 {
+    color: var(--theme-color);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.errorHelp ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.errorHelp li {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background: #252525;
+    border-left: 3px solid var(--theme-color);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9rem;
+}
+
+.navigationSuggestions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.errorButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background: #2a2a2a;
+    border: 1px solid #444;
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-family: 'Courier New', monospace;
+}
+
+.errorButton:hover {
+    background: var(--theme-color);
+    color: #000;
+    border-color: var(--theme-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-bottom: 1px solid var(--theme-color) !important;
+}
+
+.errorFooter {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #333;
+    text-align: center;
+}
+
+.errorFooter p {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.konamiHint {
+    opacity: 0.7;
+    font-style: italic;
+}
+</style>
 {{ end }}

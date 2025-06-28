@@ -1,9 +1,18 @@
+{{/* Social media links with Font Awesome icons and hover effects */}}
+{{/* Configure in hugo.toml: [[params.social]] name, url, icon, style, etc. */}}
 <div class="socialNavbar">
     <ul>
         {{ range sort .Site.Params.social "key"}}
         <li>
             {{ if isset . "icon" }}
-                <a href="{{ .url | safeURL }}" {{ if .target }} target="{{ .target }}" {{ end }} {{ if .aria }} aria-label="{{ .aria }}" {{ else }} aria-hidden="true" {{ end }} title="{{ .name }}" {{ if .rel }} rel="{{ .rel }}"{{ end }}>
+                {{/* Validate style parameter for security - only allow color properties */}}
+                {{ $validStyle := "" }}
+                {{ if .style }}
+                    {{ if strings.HasPrefix .style "color:" }}
+                        {{ $validStyle = .style }}
+                    {{ end }}
+                {{ end }}
+                <a href="{{ .url | safeURL }}" {{ if .target }} target="{{ .target }}" {{ end }} {{ if .aria }} aria-label="{{ .aria }}" {{ else }} aria-hidden="true" {{ end }} title="{{ .name }}" {{ if .rel }} rel="{{ .rel }}"{{ end }}{{ if $validStyle }} style="{{ $validStyle }}"{{ end }}>
                     <i class="{{ .icon }}"></i>
                 </a>
             {{ else }}

@@ -1,0 +1,74 @@
+{{/* Open Graph Meta Tags */}}
+<meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+<meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else if .Summary }}{{ .Summary }}{{ else }}{{ .Site.Params.description | default .Site.Params.site.tagline | default .Site.Params.sitedescription }}{{ end }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+{{ if .Params.cover }}
+<meta property="og:image" content="{{ .Params.cover | absURL }}">
+{{ else }}
+<meta property="og:image" content="{{ .Site.Params.author.avatar | absURL }}">
+{{ end }}
+<meta property="og:locale" content="{{ .Site.LanguageCode }}">
+
+{{/* Twitter Card Meta Tags */}}
+<meta name="twitter:card" content="summary">
+{{ if .Site.Params.author.twitter }}
+<meta name="twitter:site" content="@{{ .Site.Params.author.twitter }}">
+<meta name="twitter:creator" content="@{{ .Site.Params.author.twitter }}">
+{{ end }}
+<meta name="twitter:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}">
+<meta name="twitter:description" content="{{ if .Description }}{{ .Description }}{{ else if .Summary }}{{ .Summary }}{{ else }}{{ .Site.Params.description | default .Site.Params.site.tagline | default .Site.Params.sitedescription }}{{ end }}">
+{{ if .Params.cover }}
+<meta name="twitter:image" content="{{ .Params.cover | absURL }}">
+{{ else }}
+<meta name="twitter:image" content="{{ .Site.Params.author.avatar | absURL }}">
+{{ end }}
+
+{{/* Additional Meta Tags */}}
+<meta name="author" content="{{ .Site.Params.author.name }}">
+{{ if .Site.Params.seo.themeColor }}
+<meta name="theme-color" content="{{ .Site.Params.seo.themeColor }}">
+<meta name="msapplication-TileColor" content="{{ .Site.Params.seo.themeColor }}">
+{{ end }}
+<link rel="canonical" href="{{ .Permalink }}">
+
+{{/* JSON-LD Structured Data */}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "{{ if .IsHome }}WebSite{{ else }}WebPage{{ end }}",
+  "name": {{ .Site.Title | jsonify }},
+  "url": {{ .Site.BaseURL | jsonify }},
+  "description": {{ .Site.Params.description | default .Site.Params.site.tagline | default .Site.Params.sitedescription | jsonify }},
+  "author": {
+    "@type": "Person",
+    "name": "{{ .Site.Params.author.name }}",
+    "url": "{{ .Site.BaseURL }}",
+    "sameAs": [
+      {{- $sameAs := slice -}}
+      {{- if .Site.Params.author.github -}}
+        {{- $sameAs = $sameAs | append (printf "https://github.com/%s" .Site.Params.author.github) -}}
+      {{- end -}}
+      {{- if .Site.Params.author.twitter -}}
+        {{- $sameAs = $sameAs | append (printf "https://x.com/%s" .Site.Params.author.twitter) -}}
+      {{- end -}}
+      {{- if .Site.Params.author.linkedin -}}
+        {{- $sameAs = $sameAs | append (printf "https://www.linkedin.com/in/%s/" .Site.Params.author.linkedin) -}}
+      {{- end -}}
+      {{- range $index, $url := $sameAs -}}
+        {{- if $index }},{{ end }}"{{ $url }}"
+      {{- end -}}
+    ]
+  }{{ if .IsHome }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "{{ .Site.BaseURL }}search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }{{ end }}
+}
+</script>
+
+{{/* Link to humans.txt */}}
+<link type="text/plain" rel="author" href="{{ "/humans.txt" | absURL }}">
+

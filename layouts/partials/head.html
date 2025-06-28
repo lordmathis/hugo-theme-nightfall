@@ -1,6 +1,6 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="{{.Description | default .Site.Params.SiteDescription}}">
+<meta name="description" content="{{.Description | default .Site.Params.description | default .Site.Params.sitedescription | default .Site.Params.SiteDescription}}">
 
 {{ hugo.Generator }}
 
@@ -10,6 +10,9 @@
   <link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" >
   <link href="{{ .Permalink }}" rel="feed" type="application/rss+xml" title="{{ $.Site.Title }}" >
 {{- end -}}
+
+{{/* Include meta tags for SEO and social media */}}
+{{ partial "head-meta.html" . }}
 
 {{ $vars := dict
   "color" (or site.Params.styles.color "blue")
