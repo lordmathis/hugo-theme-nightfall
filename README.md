@@ -43,6 +43,19 @@ hostname = "gohugo.io"
     email = "hugo@example.com"
     avatarFirst = false
 ```
+
+### External Links
+
+You can configure external links to open in new tabs by adding this parameter:
+
+```toml
+[params]
+openLinksInNewTab = true
+```
+
+When enabled, all external links (links to different domains) will automatically open in a new tab. Internal links will continue to open in the same tab.
+
+
 ### Social links
 
 You can also add social links. To use icons for social links, you also need to add the link to icon font to custom-head.html
