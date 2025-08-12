@@ -86,15 +86,59 @@ Specify your own color with hex value or use one of the predefined colors (blue,
 
 ### Post metadata
 
-Post metadata such as tags, published date and reading time are rendered on post pages. You can turn off showing published date and reading time globally in `[params]` section of your config
+Post metadata such as tags, published date, reading time, authors, and categories can be displayed on post pages. The theme provides flexible control over metadata display with both global and per-post settings.
+
+#### Global Metadata Settings
+
+Add these parameters to your `hugo.toml` to control metadata display site-wide:
 
 ```toml
 [params]
-published = false
-readingTime = false
+# Global metadata display settings
+showMetadata = true      # Master switch for all metadata display (default: true)
+showPublishedDate = true # Show published date on post page (default: true)
+showReadingTime = true   # Show reading time on post page (default: true)
+showTags = true          # Show tags on post page (default: true)
+showAuthors = true       # Show authors on post page (default: true)
+showCategories = true    # Show categories on post page (default: true)
+
+# Legacy settings (still supported for backward compatibility):
+# published = true           # Use showPublishedDate instead (recommended)
+# readingTime = true         # Use showReadingTime instead (recommended)
 ```
 
-You can also disable metadata on a specific page by adding `showMetadata = false` to front matter.
+#### Per-Post Metadata Control
+
+You can override any global setting for individual posts by adding the same parameters to the post's frontmatter:
+
+```yaml
+---
+title: "My Post"
+date: 2024-01-15
+tags: ["hugo", "theme"]
+categories: ["web development"]
+
+# Override global settings for this post
+showMetadata: true      # Master switch
+showPublishedDate: true # Hide published date for this post
+showReadingTime: true   # Hide reading time for this post
+showTags: true          # Show tags
+showAuthors: true       # Hide authors
+showCategories: true    # Show categories
+---
+```
+
+#### Setting Precedence
+
+The metadata display follows a simple "false wins" approach:
+
+1. Default behavior: All metadata is shown (true)
+2. Any false setting hides the metadata
+3. Master switch override: If showMetadata is false, no metadata is shown regardless of individual settings
+
+#### Master Switch
+
+The `showMetadata` setting acts as a master switch. If set to `false`, no metadata will be displayed regardless of other individual settings. This is useful for pages like "About" where you don't want any metadata shown.
 
 ### Description
 

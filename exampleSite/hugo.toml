@@ -20,13 +20,20 @@ theme = "hugo-theme-nightfall"
 [params]
 user = "hello"
 hostname = "gohugo.io"
+
+# Global metadata display settings
+# Each can be overridden in individual post frontmatter
+showMetadata = true       # Master switch for all metadata display
+showPublishedDate = true  # Show published date on post page
+showReadingTime = true    # Show reading time on post page
+showTags = true           # Show tags on post page
+showAuthors = true        # Show authors on post page
+showCategories = true     # Show categories on post page
+
+
   [params.author]
     name = "Hugo Nightfall"  # Website and RSS feed author
     email = "email@example.com"  # RSS feed email address
-
-
-readingTime = true  # Show reading time on post page
-published = true  # Show published data on post page
 
 [[params.social]]
 key = 0
