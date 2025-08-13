@@ -26,21 +26,6 @@
         {{ partial "footer.html" . }}
     </div>
 
-    {{ if .Site.Params.openLinksInNewTab }}
-    <script>
-        // Make all external links open in new tab
-        document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('a[href^="http"]');
-            links.forEach(function(link) {
-                if (!link.hostname || link.hostname !== window.location.hostname) {
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                }
-            });
-        });
-    </script>
-    {{ end }}
-
 </body>
 
 </html>
