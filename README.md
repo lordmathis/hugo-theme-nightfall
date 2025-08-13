@@ -53,7 +53,7 @@ You can configure external links to open in new tabs by adding this parameter:
 openLinksInNewTab = true
 ```
 
-When enabled, all external links (links to different domains) will automatically open in a new tab. Internal links will continue to open in the same tab.
+When enabled, all external links (links which using http(s) in the markdown-destination) will automatically open in a new tab. Internal links will continue to open in the same tab.
 
 
 ### Social links
