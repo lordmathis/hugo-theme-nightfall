@@ -18,7 +18,7 @@ theme = "hugo-theme-nightfall"
     url = "about"
 
 [params]
-user = "test"
+user = "hello"
 hostname = "gohugo.io"
 
 # You can configure external links to open in new tabs by adding this parameter
