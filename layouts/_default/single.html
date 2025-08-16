@@ -8,39 +8,39 @@
     {{ if .Description}}
     	<p>{{.Description}}</p>
     {{ end }}
-        
+
     {{/* Master switch */}}
     {{ $showMetadata := true }}
     {{ if eq .Site.Params.showMetadata false }}{{ $showMetadata = false }}{{ end }}
     {{ if eq .Params.showMetadata false }}{{ $showMetadata = false }}{{ end }}
-    
+
     {{/* Published date */}}
     {{ $showPublished := true }}
     {{ if eq .Site.Params.showPublishedDate false }}{{ $showPublished = false }}{{ end }}
     {{ if eq .Site.Params.published false }}{{ $showPublished = false }}{{ end }}
     {{ if eq .Params.showPublishedDate false }}{{ $showPublished = false }}{{ end }}
-    
+
     {{/* Reading time */}}
     {{ $showReadingTime := true }}
     {{ if eq .Site.Params.showReadingTime false }}{{ $showReadingTime = false }}{{ end }}
     {{ if eq .Site.Params.readingTime false }}{{ $showReadingTime = false }}{{ end }}
     {{ if eq .Params.showReadingTime false }}{{ $showReadingTime = false }}{{ end }}
-    
+
     {{/* Tags */}}
     {{ $showTags := true }}
     {{ if eq .Site.Params.showTags false }}{{ $showTags = false }}{{ end }}
     {{ if eq .Params.showTags false }}{{ $showTags = false }}{{ end }}
-    
+
     {{/* Authors */}}
     {{ $showAuthors := true }}
     {{ if eq .Site.Params.showAuthors false }}{{ $showAuthors = false }}{{ end }}
     {{ if eq .Params.showAuthors false }}{{ $showAuthors = false }}{{ end }}
-    
+
     {{/* Categories */}}
     {{ $showCategories := true }}
     {{ if eq .Site.Params.showCategories false }}{{ $showCategories = false }}{{ end }}
     {{ if eq .Params.showCategories false }}{{ $showCategories = false }}{{ end }}
-    
+
     {{ if $showMetadata }}
     <section class="postMetadata">
         <dl>
@@ -55,8 +55,9 @@
             {{ end }}
             {{ if $showPublished }}
                 <dt>{{ i18n "published" }}</dt>
-                {{ $formattedDate := .Date.Format "2006-01-02" }}
-                <dd><time datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time></dd>
+                 {{ $layout := .Site.Params.displayDateFormat | default "2006-01-02" }}
+                 {{ $iso := .Date | time.Format "2006-01-02" }}
+                 <dd><time datetime="{{ $iso }}">{{ .Date | time.Format $layout }}</time></dd>
             {{ end }}
             {{ if $showReadingTime }}
                 <dt>{{ i18n "reading_time" }}</dt>

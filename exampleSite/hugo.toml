@@ -7,6 +7,9 @@ theme = "hugo-theme-nightfall"
     [markup.goldmark.renderer]
       unsafe = true
 
+[pagination]
+pagerSize = 3
+
 [menu]
   [[menu.header]]
     name = "blog"
@@ -23,6 +26,8 @@ hostname = "gohugo.io"
 
 # You can configure external links to open in new tabs by adding this parameter
 openLinksInNewTab = true
+
+displayDateFormat = "2006-01-02"
 
 # Global metadata display settings
 # Each can be overridden in individual post frontmatter

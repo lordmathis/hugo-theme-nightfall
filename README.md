@@ -13,6 +13,7 @@ Nightfall is a minimal dark theme for Hugo. [Demo](https://hugo-theme-nightfall.
 Install [Hugo](https://gohugo.io/installation/) and **[dart-sass](https://gohugo.io/functions/resources/tocss/#dart-sass)**.
 
 Import as [hugo module](https://gohugo.io/hugo-modules/use-modules/#use-a-module-for-a-theme) in `hugo.toml`:
+
 ```toml
 [module]
 [[module.imports]]
@@ -22,6 +23,7 @@ Import as [hugo module](https://gohugo.io/hugo-modules/use-modules/#use-a-module
 OR
 
 Import manually:
+
 1. `git clone https://github.com/LordMathis/hugo-theme-nightfall themes/nightfall`
 2. Add `theme = "nightfall"` in your `hugo.toml`:
 
@@ -55,6 +57,32 @@ openLinksInNewTab = true
 
 When enabled, all external links (links which using http(s) in the markdown-destination) will automatically open in a new tab. Internal links will continue to open in the same tab.
 
+### Configurable Date Format
+
+You can configure the Date-Format for display
+
+default:
+
+```toml
+[params]
+displayDateFormat = "2006-01-02"
+```
+
+example in german:
+
+```toml
+[params]
+displayDateFormat = "02.01.2006"
+```
+
+### Pagination for Posts
+
+The default is 10 per page. To change this adding this to the config:
+
+```toml
+[pagination]
+pagerSize = 3
+```
 
 ### Social links
 
@@ -126,18 +154,18 @@ You can override any global setting for individual posts by adding the same para
 
 ```yaml
 ---
-title: "My Post"
+title: 'My Post'
 date: 2024-01-15
-tags: ["hugo", "theme"]
-categories: ["web development"]
+tags: ['hugo', 'theme']
+categories: ['web development']
 
 # Override global settings for this post
-showMetadata: true      # Master switch
+showMetadata: true # Master switch
 showPublishedDate: true # Hide published date for this post
-showReadingTime: true   # Hide reading time for this post
-showTags: true          # Show tags
-showAuthors: true       # Hide authors
-showCategories: true    # Show categories
+showReadingTime: true # Hide reading time for this post
+showTags: true # Show tags
+showAuthors: true # Hide authors
+showCategories: true # Show categories
 ---
 ```
 
@@ -156,12 +184,14 @@ The `showMetadata` setting acts as a master switch. If set to `false`, no metada
 ### Description
 
 To add a site wide description, add `sitedescription` to `hugo.toml`. For example:
+
 ```toml
 [params]
 sitedescription = 'Your website description'
 ```
 
 You can also add a description to individual posts in you website by adding `description` to the front matter. For example:
+
 ```
 +++
 title =  'This is the post title'
@@ -170,6 +200,7 @@ date = 2024-01-23
 description = 'This is the description'
 +++
 ```
+
 ### Menu
 
 To add a menu item add `[[menu.header]]` item to `hugo.toml`. For example:

@@ -5,36 +5,60 @@
 {{ define "main" }}
 
 <div>
-    <div class="listHeader">
-        <h1>{{ .Title }}</h1>
-    </div>
+  <div class="listHeader">
+    <h1>{{ .Title }}</h1>
+  </div>
 
-    {{ with .Content }}
-    <div class="listContent">
-        {{- . -}}
-    </div>
-    {{ end }}
+  {{ with .Content }}
+  <div class="listContent">
+    {{- . -}}
+  </div>
+  {{ end }}
 
-    <div>
-        {{ range .Pages }}
+  {{ $pages := .RegularPages }}
+  {{ $paginator := .Paginate $pages }}
 
+  <div role="list">
+    {{ range $paginator.Pages }}
+      <div class="postListItem" role="listitem">
         <a class="postListLink" href="{{ .Permalink }}">
-            <!-- [html-validate-disable-next prefer-native-element] -->
-            <div class="postListItem" role="listitem">
-                <div class="postHeader">
-                    <span class="postTitle">{{ .Title }}</span>
-                    {{ $formattedDate := .Date.Format "2006-01-02" }}
-                    <time class="postDate" datetime="{{ $formattedDate }}">{{ .Date | time.Format ":date_long" }}</time>
-                </div>
-                <div class="postExcerpt">
-                    <p>{{ .Summary }}</p>
-                </div>
-            </div>
+          <div class="postHeader">
+            <span class="postTitle">{{ .Title }}</span>
+            {{ $layout := .Site.Params.displayDateFormat | default "2006-01-02" }}
+            {{ $iso := .Date | time.Format "2006-01-02" }}
+            <time class="postDate" datetime="{{ $iso }}">{{ .Date | time.Format $layout }}</time>
+          </div>
+          {{ $showReadingTime := true }}
+          {{ if eq .Site.Params.showReadingTime false }}{{ $showReadingTime = false }}{{ end }}
+          {{ if eq .Site.Params.readingTime false }}{{ $showReadingTime = false }}{{ end }}
+          {{ if eq .Params.showReadingTime false }}{{ $showReadingTime = false }}{{ end }}
+          {{ if $showReadingTime }}
+          <div class="readingTime">
+            {{ i18n "reading_time" }}: {{ i18n "reading_time_desc" .ReadingTime }}
+          </div>
+          {{ end }}
         </a>
+        <div class="postExcerpt">
+          <p>{{ .Summary }}</p>
+        </div>
+      </div>
+    {{ end }}
+  </div>
 
+  {{/* Pagination-Navigation */}}
+  {{ if gt $paginator.TotalPages 1 }}
+    <nav class="pagination" role="navigation" aria-label="Pagination">
+      {{ if $paginator.HasPrev }}
+      <a class="pagination-prev" href="{{ $paginator.Prev.URL }}" rel="prev">« {{ i18n "newer_posts" }}</a>
+      {{ end }}
 
-        {{end}}
-    </div>
+      <span class="pagination-status">{{ i18n "page" }} {{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span>
+
+      {{ if $paginator.HasNext }}
+      <a class="pagination-next" href="{{ $paginator.Next.URL }}" rel="next">{{ i18n "older_posts" }} »</a>
+      {{ end }}
+    </nav>
+  {{ end }}
 </div>
 
 {{ end }}
