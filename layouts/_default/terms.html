@@ -1,0 +1,40 @@
+{{ define "title" }}
+  {{ .Title }} | {{ .Site.Params.author.name }}
+{{ end }}
+
+{{ define "main" }}
+<div>
+  <div class="listHeader">
+    <h1>{{ .Title }}</h1>
+  </div>
+
+  {{ with .Content }}
+  <div class="listContent">
+    {{- . -}}
+  </div>
+  {{ end }}
+
+  {{/* Alphabetisch; alternativ .Data.Terms.ByCount für Häufigkeit */}}
+  {{ $terms := .Data.Terms.Alphabetical }}
+
+  {{ if not $terms }}
+    <p>{{ i18n "no_terms" }}</p>
+  {{ else }}
+    <div role="list">
+      {{ range $terms }}
+        <div class="postListItem" role="listitem">
+          <a class="postListLink" href="{{ .Page.Permalink }}">
+            <div class="postHeader">
+              <span class="postTitle">{{ .Term }}</span>
+              <span class="postDate">({{ .Count }})</span>
+            </div>
+          </a>
+          <div class="postExcerpt">
+            <p>{{ i18n "posts_with_term" }}: {{ .Term }}</p>
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  {{ end }}
+</div>
+{{ end }}

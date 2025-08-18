@@ -45,6 +45,12 @@
 [page]
   other = "Seite"
 
+[no_terms]
+  other = "Keine Begriffe gefunden."
+
+[posts_with_term]
+  other = "Beiträge mit Begriff"
+
 [newer_posts]
   other = "Neuere Beiträge"
 
