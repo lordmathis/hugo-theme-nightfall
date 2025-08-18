@@ -34,3 +34,24 @@
 
 [theme]
   other = "theme"
+
+[last_updated]
+  other = "last updated"
+
+[back_to_home]
+  other = "back to home"
+
+[page]
+  other = "page"
+
+[no_terms]
+  other = "not terms found"
+ 
+[posts_with_term]
+  other = "posts with term"
+
+[newer_posts]
+  other = "newer posts"
+
+[older_posts]
+  other = "older posts"

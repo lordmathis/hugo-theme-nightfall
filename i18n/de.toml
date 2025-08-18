@@ -1,0 +1,59 @@
+
+[not_found]
+    other = "NICHT GEFUNDEN"
+
+[not_found_desc]
+    other = "Da hast Du dich wohl verlaufen und bist auf einen Link gekommen, der nicht (mehr) existiert..."
+
+[home]
+    other = "Home"
+
+[published]
+    other = "veröffentlicht"
+
+[reading_time]
+    other = "Lesezeit"
+
+[reading_time_desc]
+  one = "1 Minute"
+  other = "{{ .Count }} Minuten"
+
+[authors]
+  other = "Publizierende"
+
+[tags]
+  other = "Schlagworte"
+
+[categories]
+  other = "Kategorien"
+
+[and]
+  other = "und"
+
+[powered_by]
+  other = "erstellt mit"
+
+[theme]
+  other = "Design"
+
+[last_updated]
+  other = "zuletzt aktualisiert"
+
+[back_to_home]
+  other = "Zurück zur Startseite"
+
+[page]
+  other = "Seite"
+
+[no_terms]
+  other = "Keine Begriffe gefunden."
+
+[posts_with_term]
+  other = "Beiträge mit Begriff"
+
+[newer_posts]
+  other = "Neuere Beiträge"
+
+[older_posts]
+  other = "Ältere Beiträge"
+

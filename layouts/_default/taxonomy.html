@@ -1,9 +1,8 @@
-{{ define "title"}}
-{{ .Title }} | {{ .Site.Params.author.name }}
+{{ define "title" }}
+  {{ .Title }} | {{ .Site.Params.author.name }}
 {{ end }}
 
 {{ define "main" }}
-
 <div>
   <div class="listHeader">
     <h1>{{ .Title }}</h1>
@@ -15,7 +14,8 @@
   </div>
   {{ end }}
 
-  {{ $pages := .RegularPages }}
+  {{/* Posts für diesen Taxonomie-Begriff */}}
+  {{ $pages := .Pages }}
   {{ $paginator := .Paginate $pages }}
 
   <div role="list">
@@ -28,6 +28,8 @@
             {{ $iso := .Date | time.Format "2006-01-02" }}
             <time class="postDate" datetime="{{ $iso }}">{{ .Date | time.Format $layout }}</time>
           </div>
+
+          {{/* Reading Time Regeln wie in deiner list.html */}}
           {{ $showReadingTime := true }}
           {{ if eq .Site.Params.showReadingTime false }}{{ $showReadingTime = false }}{{ end }}
           {{ if eq .Site.Params.readingTime false }}{{ $showReadingTime = false }}{{ end }}
@@ -38,6 +40,7 @@
           </div>
           {{ end }}
         </a>
+
         <div class="postExcerpt">
           <p>{{ .Summary }}</p>
         </div>
@@ -45,8 +48,7 @@
     {{ end }}
   </div>
 
-{{ partial "pagination.html" (dict "paginator" $paginator) }}
-
+  {{ partial "pagination.html" (dict "paginator" $paginator) }}
+  
 </div>
-
 {{ end }}

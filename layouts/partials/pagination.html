@@ -1,0 +1,21 @@
+{{/* layouts/partials/pagination.html */}}
+{{- $p := .paginator -}}
+{{- if and $p (gt $p.TotalPages 1) -}}
+<nav class="pagination" role="navigation" aria-label="Pagination">
+  {{- if $p.HasPrev -}}
+  <a class="pagination-prev" href="{{ $p.Prev.URL }}" rel="prev">
+    « {{ i18n "newer_posts" | default "Newer posts" }}
+  </a>
+  {{- end -}}
+
+  <span class="pagination-status">
+    {{ i18n "page" | default "Page" }} {{ $p.PageNumber }} / {{ $p.TotalPages }}
+  </span>
+
+  {{- if $p.HasNext -}}
+  <a class="pagination-next" href="{{ $p.Next.URL }}" rel="next">
+    {{ i18n "older_posts" | default "Older posts" }} »
+  </a>
+  {{- end -}}
+</nav>
+{{- end -}}
